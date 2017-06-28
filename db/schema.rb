@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628133238) do
+ActiveRecord::Schema.define(version: 20170628133827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20170628133238) do
     t.bigint "students_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "student_id"
+    t.index ["student_id"], name: "index_batches_on_student_id"
     t.index ["students_id"], name: "index_batches_on_students_id"
   end
 
@@ -41,6 +43,8 @@ ActiveRecord::Schema.define(version: 20170628133238) do
     t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "day_id"
+    t.index ["day_id"], name: "index_students_on_day_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,5 +64,7 @@ ActiveRecord::Schema.define(version: 20170628133238) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "batches", "students"
   add_foreign_key "days", "students"
+  add_foreign_key "students", "days"
 end

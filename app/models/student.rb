@@ -1,4 +1,4 @@
 class Student < ApplicationRecord
   belongs_to :batch
-  belongs_to :day
+  has_many :day
 end
