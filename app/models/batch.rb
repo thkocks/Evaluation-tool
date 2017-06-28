@@ -1,7 +1,12 @@
-class Batch < ApplicationRecord
-  has_many :students
+class CreateBatches < ActiveRecord::Migration[5.1]
+  def change
+    create_table :batches do |t|
+      t.integer :number
+      t.datetime :start_date
+      t.datetime :end_date
+      t.references :students
 
-  validates :number, presence: true
-  validates :start_date, presence: true
-  validates :end_date, presence: true
+      t.timestamps
+    end
+  end
 end
